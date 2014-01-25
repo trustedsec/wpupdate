@@ -40,7 +40,7 @@ def update_check():
         if not os.path.isfile("/usr/share/wpupdate/database/latest.zip"):
             if not os.path.isfile("wpupdate.py"):
                 os.chdir("/usr/share/wpupdate")
-            download_file("http://wordpress.org/latest.zip", "latest.zip")
+            download_file("https://wordpress.org/latest.zip", "latest.zip")
             print "[*] Updating Wordpress right now for the first time..."
             subprocess.Popen("cp database/latest.zip /tmp", shell=True).wait()
             os.chdir("/tmp") 
