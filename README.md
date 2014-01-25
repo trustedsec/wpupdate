@@ -30,4 +30,6 @@ Simply run python setup.py, hit yes to install. Note that if your installation i
 
 ### Future Plans
 
-Add a configuration option to modify /var/www, time to check, etc.
+- Add a configuration option to modify /var/www, time to check, etc.
+- Right now it downloads the entire zip file for checks nightly, I'll eventually grab release info from the site instead of having to download the entire file
+- Add ability to specify multiple wordpress installations
