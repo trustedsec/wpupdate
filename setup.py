@@ -42,9 +42,9 @@ if not os.path.isfile("/etc/init.d/wpupdate"):
             # if old files are there
             if os.path.isdir("/usr/share/wpupdate"):
                 shutil.rmtree('/usr/share/wpupdate')
-            #subprocess.Popen("git clone https://github.com/trustedsec/wpupdate /usr/share/wpupdate", shell=True).wait()
-            os.makedirs("/usr/share/wpupdate")
-            subprocess.Popen("cp -rf * /usr/share/wpupdate/", shell=True).wait()
+            subprocess.Popen("git clone https://github.com/trustedsec/wpupdate /usr/share/wpupdate", shell=True).wait()
+           # os.makedirs("/usr/share/wpupdate")
+           # subprocess.Popen("cp -rf * /usr/share/wpupdate/", shell=True).wait()
 
             print "[*] Installing the service for you.."
 
