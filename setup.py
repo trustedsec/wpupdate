@@ -57,7 +57,7 @@ if not os.path.isfile("/etc/init.d/wpupdate"):
                 filewrite.close()
                 print "[*] Triggering update-rc.d on wpupdate to automatically start..."
                 subprocess.Popen("chmod +x /etc/init.d/wpupdate", shell=True).wait()
-                subprocess.Popen("update-rc.d artillery defaults", shell=True).wait()
+                subprocess.Popen("update-rc.d wpupdate defaults", shell=True).wait()
 
             print "[*] Finished. If you want to update WPUpdate go to /usr/share/wpupdate and type 'git pull'"
 
