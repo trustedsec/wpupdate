@@ -31,4 +31,4 @@ Simply run python setup.py, hit yes to install. Note that if your installation i
 
 ### Future Plans
 
-- Just completed the future plans
+- Add support for plugin updates
