@@ -110,5 +110,5 @@ def update_check():
         future = datetime.datetime(t.year,t.month,t.day,2,0)
         if t.hour >= 2:
             future += datetime.timedelta(days=1)
-        print "Okay, WPUpdate is now sleeping for another: " + str(future-t)
+        print "WPUpdate is now sleeping for another: " + str(future-t)
         time.sleep((future-t).seconds)
