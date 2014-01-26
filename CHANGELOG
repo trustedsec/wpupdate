@@ -1,4 +1,14 @@
 ~~~~~~~~~~~~~~
+version 0.2
+~~~~~~~~~~~~~~
+
+* added a config file with option to specify multiple wordpress installations
+* fixed a path typo for wp-content
+* major rewrite, no longer downloads the file each night and does hash comparisons, it pulls from wordpress' api then does a match under wp-includes/versions.php - much more efficient and don't need to maintain a working copy
+* rewrote it so that it only downloads latest.zip once if needed
+* added ability to specify multiple wordpress installations and as many as you want
+
+~~~~~~~~~~~~~~
 version 0.1
 ~~~~~~~~~~~~~~
 

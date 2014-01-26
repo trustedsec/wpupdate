@@ -1,0 +1,11 @@
+######################################
+#
+# configuration file for wpupdate
+#
+######################################
+#
+#
+## This is the path for directories that wpupdate will automatically go and update. If you have multiple sites
+## seperate them simply by commas. For example say I have two different blogs in /var/www/blog1 and /var/www/blog2
+## if I add the line below to be /var/www/blog1,/var/www/blog2 it will iterate through the directories for you.
+BLOG_PATH="/var/www/moo,/var/www/boo"
