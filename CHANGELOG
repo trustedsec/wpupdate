@@ -1,4 +1,11 @@
 ~~~~~~~~~~~~~~
+version 0.3
+~~~~~~~~~~~~~~
+
+* added support to automatically pull the latest version of plugins from api.wordpress.org then from there update plugins accordingly - note its not possible to grab versions and check to update, we actually have to pull the zip and update each time. Little less efficient but it works. Will work on another solution later.
+* added better handling if a plugin wasn't found, it would let you know that its no longer in the wordpress repository
+
+~~~~~~~~~~~~~~
 version 0.2
 ~~~~~~~~~~~~~~
 

@@ -73,6 +73,7 @@ def update_check():
         # check directories
         wp_path = check_config("BLOG_PATH=").split(",")
         update_counter = 0
+        # for paths iterates through config file for multiple install        
         for paths in wp_path:    
             data = file("%s/wp-includes/version.php" % (paths), "r").readlines()
             for line in data:
@@ -81,6 +82,7 @@ def update_check():
                         version = line.replace("$wp_version = '", "").replace("';", "")
                         print "[*] Your version of wordpress is: " + str(version) + " for installation located in: " + paths
 
+            # if we aren't running the latest - then download it
             if current_version != version:
                 print "[*] Upgrade detected. Performing upgrade now for %s." % (paths)
                 if update_counter == 0:
@@ -96,12 +98,45 @@ def update_check():
                 subprocess.Popen("cp -rf /tmp/wordpress/* %s/" % (paths), shell=True).wait()
                 print "[*] Fixing up permissions now..."
                 subprocess.Popen("chown -R root:root %s/;chown -R www-data:www-data %s/wp-content/uploads/" % (paths,paths), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        
+            else:
+                print "[*] You are up to date for Wordpress. Moving on to plugins."
 
-        else:
-            print "[*] You are up to date! Waiting until 2am until next check."
+            if os.path.isfile("/tmp/latest.zip"):
+                subprocess.Popen("rm /tmp/latest.zip;rm -rf /tmp/wordpress", shell=True).wait()
 
-        if os.path.isfile("/tmp/latest.zip"):
-            subprocess.Popen("rm /tmp/latest.zip;rm -rf /tmp/wordpress", shell=True).wait()
+            ##
+            ## section here is dedicated to pulling latest plugins - can't do version checks, just need to update unfortuantely
+            ## 
+                
+            # first we need to grab the plugin details, we'll iterate through them
+            os.chdir(paths + "/wp-content/plugins/")
+            plugins = [name for name in os.listdir(".") if os.path.isdir(name)]
+            # go through the plugins and pull the download links and install
+            for plugin in plugins:
+                # pull from api database: http://api.wordpress.org/plugins/info/1.0/$plugname.xml
+                pull = urllib2.urlopen("http://api.wordpress.org/plugins/info/1.0/%s.xml" % (plugin)).readlines()
+                counter = 0
+                for line in pull:        
+                    if "download_link" in line:
+                        # our URL to download
+                        download_link = line.replace("]]></download_link>", "").split("[CDATA[")[1].rstrip()
+                        print "[*] Pulling the latest version of: " + plugin + " from URL: " + download_link + " for site in: " + paths
+                        download_file(download_link, "plugin.zip")
+                        os.chdir("/tmp")
+                        subprocess.Popen("unzip plugin.zip;cp -rf %s %s/wp-content/plugins/;rm -rf plugin.zip;rm -rf %s" % (plugin, paths, plugin), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).wait()
+                        print "[*] Plugin have been updated if needed..."
+                        counter = 1
+
+                # if we couldn't find the plugin
+                if counter == 0:
+                    print "[!] Unable to download update for plugin: " + plugin + " it may no longer be supported."
+
+            # change back to our working directory            
+            os.chdir("/usr/share/wpupdate")
+
+        # thats it! wait for a bit we use 61 seconds in case the minute hasn't passed and it was too fast
+        print "[*] Everything has finished for this go-around. Waiting 61 seconds then sleeping for another day..."                    
 
         # sleep for at least a minute, 1 second
         time.sleep(61)
