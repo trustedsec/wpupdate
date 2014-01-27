@@ -1,4 +1,4 @@
-WPUpdate is a simple update script that will automatically update your wordpress installation when a new release is out.  It does this by doing a compare on Wordpresses update API on their website then doing a comparison under wp-includes/version.php. From there, it will determine if changes are needed and an update. After that it will automatically update wordpress, set the permissions to be restricted to only root:root for security reasons (except uploads). After that, it'll check again at 2AM. WPUpdate also updates third party plugins automatically as well.
+WPUpdate is a simple update script that will automatically update your wordpress installation when a new release is out.  It does this by doing a compare on Wordpresses update API on their website then doing a comparison under wp-includes/version.php. From there, it will determine if changes are needed and an update. After that it will automatically update wordpress, set the ownership to be restricted to only root:root for security reasons (except uploads). After that, it'll check again at 2AM. WPUpdate also updates third party plugins automatically as well.
 
 ### Features
 
