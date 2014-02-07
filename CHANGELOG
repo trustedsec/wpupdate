@@ -1,4 +1,10 @@
 ~~~~~~~~~~~~~~
+version 0.4
+~~~~~~~~~~~~~~
+
+* added checkout from github instead of copying files over
+
+~~~~~~~~~~~~~~
 version 0.3
 ~~~~~~~~~~~~~~
 
